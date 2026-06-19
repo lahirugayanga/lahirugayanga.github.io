@@ -1,0 +1,415 @@
+:root {
+    --bg: #0b0d12;
+    --surface: #14171f;
+    --surface-2: #1a1f2b;
+    --border: #232a38;
+    --border-hover: #3a455e;
+    --text: #e7eaf0;
+    --text-dim: #99a2b4;
+    --text-faint: #6b7385;
+    --accent: #5b8cff;
+    --accent-soft: rgba(91, 140, 255, 0.13);
+    --violet: #a78bfa;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+        radial-gradient(900px 500px at 20% -5%, rgba(91, 140, 255, 0.10), transparent 60%),
+        radial-gradient(700px 500px at 100% 0%, rgba(167, 139, 250, 0.07), transparent 55%);
+    background-attachment: fixed;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+::selection {
+    background: var(--accent-soft);
+}
+
+/* ---------- Layout shell ---------- */
+.shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 64px) clamp(20px, 4vw, 48px) 72px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(36px, 5vw, 56px);
+}
+
+@media (min-width: 920px) {
+    .shell {
+        grid-template-columns: 312px 1fr;
+        align-items: start;
+    }
+
+    .identity {
+        position: sticky;
+        top: clamp(24px, 5vw, 64px);
+    }
+}
+
+/* ---------- Identity rail ---------- */
+.avatar-ring {
+    width: 270px;
+    height: 320px;
+    border-radius: 22px;
+    padding: 3px;
+    background: conic-gradient(from 210deg, var(--accent), var(--violet), var(--accent));
+    margin-bottom: 22px;
+}
+
+.avatar-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 19px;
+    object-fit: cover;
+    display: block;
+    background: var(--surface);
+    border: 3px solid var(--bg);
+}
+
+h1.name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 4vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 6px;
+}
+
+.role {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin: 0 0 18px;
+}
+
+.bio {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    margin: 0 0 26px;
+    max-width: 40ch;
+}
+
+/* ---------- Contact links ---------- */
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 8px;
+}
+
+.contact a,
+.contact .static {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    margin-left: -10px;
+    border-radius: 9px;
+    color: var(--text-dim);
+    font-size: 14px;
+    transition: color .15s ease, background .15s ease;
+}
+
+.contact a:hover {
+    color: var(--text);
+    background: var(--surface);
+}
+
+.contact svg {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    opacity: .85;
+}
+
+/* ---------- Main content ---------- */
+.section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(22px, 3vw, 27px);
+    letter-spacing: -0.015em;
+    margin: 0;
+}
+
+.ghostlink {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-dim);
+    transition: color .15s ease;
+}
+
+.ghostlink:hover {
+    color: var(--accent);
+}
+
+section {
+    margin-bottom: clamp(48px, 7vw, 72px);
+}
+
+section:last-of-type {
+    margin-bottom: 0;
+}
+
+/* ---------- Filter chips ---------- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.filter {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 6px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.filter:hover {
+    color: var(--text);
+    border-color: var(--border-hover);
+}
+
+.filter[aria-pressed="true"] {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.filter .count {
+    opacity: .55;
+    margin-left: 5px;
+}
+
+/* ---------- Repo grid ---------- */
+.repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.repo {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform .18s ease, border-color .18s ease;
+}
+
+.repo:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-hover);
+}
+
+/* preview image / gif */
+.repo-preview {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--surface-2);
+    background: linear-gradient(135deg,
+            color-mix(in srgb, var(--tint, var(--accent)) 28%, var(--surface)),
+            var(--surface) 72%);
+    overflow: hidden;
+}
+
+.repo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.repo-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text);
+    background: rgba(11, 13, 18, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: color .15s ease, border-color .15s ease;
+}
+
+.repo-badge:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.repo-badge svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
+
+/* body */
+.repo-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 18px 20px 20px;
+}
+
+.repo-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin-bottom: 7px;
+}
+
+.repo-title .ext {
+    flex: none;
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: var(--text-faint);
+    stroke-width: 2.2;
+    transition: stroke .15s ease, transform .15s ease;
+}
+
+.repo-title:hover .ext {
+    stroke: var(--accent);
+    transform: translate(2px, -2px);
+}
+
+.repo-meta-line {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+    margin: 0 0 12px;
+}
+
+.repo-desc {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin: 0 0 16px;
+    flex: 1;
+}
+
+.repo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-dim);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 4px 9px;
+    border-radius: 7px;
+}
+
+.lang-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex: none;
+}
+
+/* ---------- Stack chips ---------- */
+.stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color .15s ease, transform .15s ease;
+}
+
+.chip:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+}
+
+.chip .lang-dot {
+    width: 9px;
+    height: 9px;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+    padding-top: 22px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-faint);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before {
+        transition: none !important;
+        animation: none !important;
+    }
+}
